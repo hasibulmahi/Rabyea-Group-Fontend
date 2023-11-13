@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiBase } from "../../config";
 
 export const createClientNotification = (userData) => async (dispatch) => {
   try {
@@ -6,7 +7,7 @@ export const createClientNotification = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     const { data } = await axios.post(
-      "/api/v1/create/client/notification",
+      apiBase + "/api/v1/create/client/notification",
       userData,
       config
     );

@@ -14,14 +14,15 @@ import {
 
 const HrDashboard = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const user = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : null;
   const { revenue, monRevenue, dailyRevenue } = useSelector(
     (state) => state.revenue
   );
   const { topcustomer, unpaidcustomer } = useSelector(
     (state) => state.customer
   );
-  console.log(topcustomer);
 
   const { projects } = useSelector((state) => state.projects);
   const {

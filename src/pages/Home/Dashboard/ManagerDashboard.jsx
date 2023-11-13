@@ -27,7 +27,9 @@ import FullLoading from "../../../components/FullLoading";
 
 const ManagerDashboard = () => {
   const dispatch = useDispatch();
-  const { user, loading } = useSelector((state) => state.user);
+  const user = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : null;
   const { project, ploading, success, error } = useSelector(
     (state) => state.project
   );

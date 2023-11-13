@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiBase } from "../../config";
 
 export const meterialPdf = (userData, id) => async (dispatch) => {
   try {
@@ -6,7 +7,7 @@ export const meterialPdf = (userData, id) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      `/api/v1/meterial/genarate/pdf/${id}`,
+      apiBase + `/api/v1/meterial/genarate/pdf/${id}`,
       userData,
       config
     );
@@ -23,7 +24,7 @@ export const getMeterialPdf = () => async (dispatch) => {
   try {
     dispatch({ type: "GetMeterialExpensesRequest" });
 
-    const { data } = await axios.get(`/api/v1/meterial/pdf`);
+    const { data } = await axios.get(apiBase + `/api/v1/meterial/pdf`);
 
     dispatch({
       type: "GetMeterialExpensesSuccess",

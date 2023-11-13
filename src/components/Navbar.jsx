@@ -6,11 +6,15 @@ import { logOut } from "../redux/actions/userAction";
 
 const Navbar = ({ showSidebar, setShowSidebar }) => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
+
+  const user = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : null;
 
   return (
     <>
-      {isAuthenticated && (
+      {user && (
         <div className="bg-blue2 flex justify-between items-center py-3 px-3 sm:px-12 shadow-input fixed w-full z-50">
           <img
             className="h-7 sm:h-7 md:h-9 cursor-pointer"

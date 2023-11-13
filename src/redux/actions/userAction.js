@@ -1,4 +1,6 @@
 import axios from "axios";
+import { apiBase } from "../../config";
+import { isEmpty } from "lodash";
 
 export const loginUser = (userData) => async (dispatch) => {
   try {
@@ -6,7 +8,14 @@ export const loginUser = (userData) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
 
-    const { data } = await axios.post("/api/v1/login/user", userData, config);
+    const { data } = await axios.post(
+      apiBase + "/api/v1/login/user",
+      userData,
+      config
+    );
+    if (data) {
+      localStorage.setItem("userData", JSON.stringify(data?.user));
+    }
     dispatch({ type: "LoginSuccess", payload: data.user });
   } catch (err) {
     dispatch({ type: "LoginFail", payload: err.response.data.message });
@@ -17,7 +26,7 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: "LoadUserRequest" });
 
-    const { data } = await axios.get("/api/v1/user/me");
+    const { data } = await axios.get(apiBase + "/api/v1/user/me");
     dispatch({ type: "LoadUserSuccess", payload: data.user });
   } catch (err) {
     dispatch({ type: "LoadUserFail", payload: err.response.data.message });
@@ -31,7 +40,7 @@ export const forgotPassword = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     const { data } = await axios.post(
-      "/api/v1/user/forgot/password",
+      apiBase + "/api/v1/user/forgot/password",
       userData,
       config
     );
@@ -52,7 +61,7 @@ export const resetPassword = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     const { data } = await axios.put(
-      "/api/v1/user/password/reset",
+      apiBase + "/api/v1/user/password/reset",
       userData,
       config
     );
@@ -72,7 +81,10 @@ export const logOut = () => async (dispatch) => {
     dispatch({ type: "LogoutRequest" });
     // const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-    const { data } = await axios.get("/api/v1/logout");
+    const { data } = await axios.get(apiBase + "/api/v1/logout");
+    if (!isEmpty(data)) {
+      localStorage.removeItem("userData");
+    }
     dispatch({ type: "LogoutSuccess", payload: data.message });
   } catch (error) {
     dispatch({

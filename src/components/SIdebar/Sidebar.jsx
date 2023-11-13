@@ -6,8 +6,11 @@ import ManagerSidebar from "./ManagerSidebar";
 import ClientSidebar from "./ClientSidebar";
 
 const Sidebar = ({ showSidebar }) => {
-  const { user, isAuthenticated } = useSelector((state) => state.user);
-  if (isAuthenticated) {
+  const { isAuthenticated } = useSelector((state) => state.user);
+  const user = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : null;
+  if (user) {
     if (user.role === "Admin") {
       return <AdminSidebar showSidebar={showSidebar} />;
     } else if (user.role === "Hr") {

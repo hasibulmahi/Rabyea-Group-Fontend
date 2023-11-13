@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiBase } from "../../config";
 
 export const createEmployee = (userData) => async (dispatch) => {
   try {
@@ -6,7 +7,7 @@ export const createEmployee = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     const { data } = await axios.post(
-      "/api/v1/manager/create",
+      apiBase + "/api/v1/manager/create",
       userData,
       config
     );
@@ -23,7 +24,9 @@ export const getEmployee = (keyword) => async (dispatch) => {
   try {
     dispatch({ type: "GetEmployeeRequest" });
 
-    const { data } = await axios.get(`/api/v1/get/manager?keyword=${keyword}`);
+    const { data } = await axios.get(
+      apiBase + `/api/v1/get/manager?keyword=${keyword}`
+    );
     dispatch({ type: "GetEmployeeSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -37,7 +40,7 @@ export const getSingleEmployee = (id) => async (dispatch) => {
   try {
     dispatch({ type: "GetSingleEmployeeRequest" });
 
-    const { data } = await axios.get(`/api/v1/manager/${id}`);
+    const { data } = await axios.get(apiBase + `/api/v1/manager/${id}`);
     dispatch({ type: "GetSingleEmployeeSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -52,7 +55,7 @@ export const updateEmployee = (id, userData) => async (dispatch) => {
     dispatch({ type: "GetUpdateEmployeeRequest" });
     const config = { headers: { "Content-Type": "multipart/form-data" } };
     const { data } = await axios.put(
-      `/api/v1/manager/update/${id}`,
+      apiBase + `/api/v1/manager/update/${id}`,
       userData,
       config
     );
@@ -68,7 +71,9 @@ export const updateEmployee = (id, userData) => async (dispatch) => {
 export const deleteEmployee = (id) => async (dispatch) => {
   try {
     dispatch({ type: "DeleteEmployeeRequest" });
-    const { data } = await axios.delete(`/api/v1/manager/delete/${id}`);
+    const { data } = await axios.delete(
+      apiBase + `/api/v1/manager/delete/${id}`
+    );
     dispatch({ type: "DeleteEmployeeSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -84,7 +89,7 @@ export const createClient = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     const { data } = await axios.post(
-      "/api/v1/client/create",
+      apiBase + "/api/v1/client/create",
       userData,
       config
     );
@@ -101,7 +106,9 @@ export const getClient = (keyword) => async (dispatch) => {
   try {
     dispatch({ type: "GetClientRequest" });
 
-    const { data } = await axios.get(`/api/v1/get/client?keyword=${keyword}`);
+    const { data } = await axios.get(
+      apiBase + `/api/v1/get/client?keyword=${keyword}`
+    );
     dispatch({ type: "GetClientSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -115,7 +122,7 @@ export const getSingleClient = (id) => async (dispatch) => {
   try {
     dispatch({ type: "GetSingleClientRequest" });
 
-    const { data } = await axios.get(`/api/v1/client/${id}`);
+    const { data } = await axios.get(apiBase + `/api/v1/client/${id}`);
     dispatch({ type: "GetSingleClientSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -130,7 +137,7 @@ export const updateClient = (id, userData) => async (dispatch) => {
     dispatch({ type: "GetUpdateClientRequest" });
     const config = { headers: { "Content-Type": "multipart/form-data" } };
     const { data } = await axios.put(
-      `/api/v1/client/update/${id}`,
+      apiBase + `/api/v1/client/update/${id}`,
       userData,
       config
     );
@@ -146,7 +153,9 @@ export const updateClient = (id, userData) => async (dispatch) => {
 export const deleteClient = (id) => async (dispatch) => {
   try {
     dispatch({ type: "DeleteClientRequest" });
-    const { data } = await axios.delete(`/api/v1/client/delete/${id}`);
+    const { data } = await axios.delete(
+      apiBase + `/api/v1/client/delete/${id}`
+    );
     dispatch({ type: "DeleteClientSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -160,7 +169,7 @@ export const getProjectManager = () => async (dispatch) => {
   try {
     dispatch({ type: "GetProjectManagerRequest" });
 
-    const { data } = await axios.get(`/api/v1/project/manager`);
+    const { data } = await axios.get(apiBase + `/api/v1/project/manager`);
     dispatch({ type: "GetProjectManagerSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -174,7 +183,7 @@ export const getProjectClient = () => async (dispatch) => {
   try {
     dispatch({ type: "GetProjectClientRequest" });
 
-    const { data } = await axios.get(`/api/v1/project/client`);
+    const { data } = await axios.get(apiBase + `/api/v1/project/client`);
     dispatch({ type: "GetProjectClientSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -190,7 +199,7 @@ export const createProject = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     const { data } = await axios.post(
-      "/api/v1/project/create",
+      apiBase + "/api/v1/project/create",
       userData,
       config
     );
@@ -207,7 +216,9 @@ export const getProject = (keyword) => async (dispatch) => {
   try {
     dispatch({ type: "GetProjectRequest" });
 
-    const { data } = await axios.get(`/api/v1/get/project?keyword=${keyword}`);
+    const { data } = await axios.get(
+      apiBase + `/api/v1/get/project?keyword=${keyword}`
+    );
     dispatch({ type: "GetProjectSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -221,7 +232,7 @@ export const getSingleProject = (id) => async (dispatch) => {
   try {
     dispatch({ type: "GetSingleProjectRequest" });
 
-    const { data } = await axios.get(`/api/v1/get/project/${id}`);
+    const { data } = await axios.get(apiBase + `/api/v1/get/project/${id}`);
     dispatch({ type: "GetSingleProjectSuccess", payload: data.project });
   } catch (err) {
     dispatch({
@@ -237,7 +248,7 @@ export const createSalary = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     const { data } = await axios.post(
-      "/api/v1/payment/create",
+      apiBase + "/api/v1/payment/create",
       userData,
       config
     );
@@ -254,7 +265,7 @@ export const getAdminNotification = () => async (dispatch) => {
   try {
     dispatch({ type: "GetAdminNotificationRequest" });
 
-    const { data } = await axios.get("/api/v1/admin/notification");
+    const { data } = await axios.get(apiBase + "/api/v1/admin/notification");
     dispatch({ type: "GetAdminNotificationSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -267,7 +278,7 @@ export const getManagerNotification = () => async (dispatch) => {
   try {
     dispatch({ type: "GetManagerNotificationRequest" });
 
-    const { data } = await axios.get("/api/v1/maneger/notification");
+    const { data } = await axios.get(apiBase + "/api/v1/maneger/notification");
     dispatch({ type: "GetManagerNotificationSuccess", payload: data });
   } catch (err) {
     dispatch({
@@ -280,7 +291,9 @@ export const getClientNotification = () => async (dispatch) => {
   try {
     dispatch({ type: "GetClientNotificationRequest" });
 
-    const { data } = await axios.get("/api/v1/get/client/notification");
+    const { data } = await axios.get(
+      apiBase + "/api/v1/get/client/notification"
+    );
     dispatch({ type: "GetClientNotificationSuccess", payload: data });
   } catch (err) {
     dispatch({

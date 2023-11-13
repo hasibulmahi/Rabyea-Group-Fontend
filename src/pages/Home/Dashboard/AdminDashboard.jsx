@@ -14,7 +14,9 @@ import {
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const user = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : null;
   const { revenue, monRevenue, dailyRevenue } = useSelector(
     (state) => state.revenue
   );
